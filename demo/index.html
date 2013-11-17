@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>f</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <script src="http://zeptojs.com/zepto.js"></script>
+
+    <link href="css/pg.css" rel="stylesheet" />
+    <link href="css/panel.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+        <p>不使用require.js等加载器，回归最传统方式组织代码，最终用grunt打包代码</p>
+        <p>window.c_manager为组件管理器命名空间，勿覆盖</p>
+
+        <div class="panel">
+            <p class="dis"></p>
+            <input type="button" class="btn" value="click me" />
+        </div>
+
+    <div id="page"></div>
+    <div class="p"></div>
+    <div class="p"></div>
+    
+        
+        <script src="../c_manager.js"></script>
+
+        <!--分页组件-->
+        <script src="components/pg.js"></script>
+        <!--panel组件-->
+        <script src="components/utils/comm.js"></script>
+        <script src="components/utils/url.js"></script>
+        <script src="components/panel.js"></script>
+
+
+    <script>
+
+        var pa = new Panel('.panel');
+        pa.on('Pa:getDomain', function (e, arg) {
+            alert('业务代码获取到组件传来的domain值：' + arg.val);
+            //pg.setAttr({ 'pageCount': 50 })
+            //pg.setAttr({ 'index': 5 })
+            pg.trigger('P:setCount', 10)
+            pg.pg_setIndex(5)
+        })
+
+
+        var pg = new Pg('#page', { 'pageCount': 30 });
+        pg.on('P:switchPage', function (e, page) {
+            console.log('just page id dom do sth', this.getAttr('index'))
+            //this.setAttr({ 'pageCount': 50 })
+            //this.setAttr('pageCount', 50)
+            page.callback && page.callback('');
+        })
+
+        ////var pg1 = new Pg('.p', { 'pageCount': 40 })
+        //var ins = [];
+        //$('.p').each(function (i, node) {
+        //    ins.push(new Pg(node, { 'pageCount': 40 }, { 'index': 2 }));  //后续多个参数都作为配置项合并
+        //})
+
+
+        //销毁某个实例
+        pg.teardown()
+
+        //销毁某个组件所有实例
+        //Pg.teardownAll()
+
+        //销毁所有组件
+        //c_manager.defineComponent.teardownAll();
+    </script>
+</body>
+</html>

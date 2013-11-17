@@ -1,0 +1,20 @@
+/****************************************************
+* author：  hualei
+* time：    2013/5/16 15:29:8
+* fileName：demo.css
+*****************************************************/
+
+p{
+    margin: 10px;
+}
+.panel{
+    margin-top: 30px;
+}
+.selected{
+    background: #ccc;
+}
+input.btn{
+    border:1px solid #333;
+    margin: 10px;
+    padding: 10px;
+}
